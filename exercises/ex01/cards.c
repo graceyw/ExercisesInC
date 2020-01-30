@@ -10,7 +10,7 @@
     Input: A three-character array called card_name, and an integer called val.
     Output: An updated value of val.
 */
-determineCard(char card_name[3], int val) {
+int determineCard(char card_name[3], int val) {
   switch(card_name[0]) {
     case 'K':
     case 'Q':
@@ -36,7 +36,7 @@ determineCard(char card_name[3], int val) {
     Input: Our three-character array card_name, int val, and int count
     Output: An updated value of count, our new running total.
 */
-addCard(char card_name[3], int val, int count) {
+int addCard(char card_name[3], int val, int count) {
   if ((val>2) && (val<7)) {
     count++;
   } else if (val == 10) {
@@ -61,10 +61,10 @@ int printResult(int count) {
 int main() {
   char card_name[3];
   int count = 0;
+  int val = 0;
   while (card_name[0] != 'X') {
     puts("Enter the card_name: ");
     scanf("%2s", card_name);
-    int val = 0;
     val = determineCard(card_name, val);
     count = addCard(card_name, val, count);
     printResult(count);
