@@ -1,6 +1,6 @@
 /*  This program counts cards.
     Author: Gracey Wilson
-    Sources: Originally factored source code from Chapter 1 of Head First C, page 37)
+    Sources: Originally factored source code from Chapter 1 of Head First C, page 37
 */
 
 #include <stdio.h>
