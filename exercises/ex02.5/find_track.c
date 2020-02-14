@@ -48,7 +48,10 @@ int match(const char *string, char *pattern)
     status = regexec(&re, string, (size_t) 0, NULL, 0);
     regfree(&re);
     if (status != 0) {
-      printf("Did not compile - there was an error\n"); // I imagine I could use regerror() here but I couldn't figure it out in the documentation. Is that a requirement?
+      if (status !=1) {
+        printf("Did not execute - there was an error\n"); // I imagine I could use regerror() here but I couldn't figure it out in the documentation. Is that a requirement?
+        exit(1);
+      }
       return(0);      /* report error */
     }
     return(1);

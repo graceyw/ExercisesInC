@@ -13,7 +13,9 @@ int convert(int *s) {
 }
 
 int main() {
-  // prompt
+  char input[];
+  printf("Input an integer: ");
+  fgets(input, 3, stdin);
   //make a pointer to the string user inputted
   // convert(int *s);
   // add them all up

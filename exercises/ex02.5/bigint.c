@@ -3,6 +3,9 @@
 This program shows a way to represent a BigInt type (arbitrary length integers)
 using C strings, with numbers represented as a string of decimal digits in reverse order.
 
+Author: Gracey Wilson
+I worked with William Derksen for part of this HW!
+
 Follow these steps to get this program working:
 
 1) Read through the whole program so you understand the design.
@@ -32,8 +35,12 @@ It is the caller's responsibility to free the result.
 s: string
 returns: string
 */
-char *reverse_string(char *s) {
-    //TODO: Fill this in.
+char *reverse_string(char *s) {  //can't get length of a string from a pointer :(
+    int len = strlen(s);
+
+    for (int i=0; i<len/2; i++) {
+      swap()
+    }
     return "";
 }
 
