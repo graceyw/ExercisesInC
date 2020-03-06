@@ -29,15 +29,15 @@ int main() {
   int nums[5];
   int index = 0;
   printf("\n Input an integer: ");
-  while (fgets(input, 5, stdin) != NULL) {  //typing Ctrl-D will return NULL and end the loop
+  while (fgets(input, 5, stdin) != NULL) {  // Typing Ctrl-D will return NULL and end the loop
     if (index > 4) {
+      printf("Please enter a number with 5 digits or less. \n"); // Error if input size too big
       break;
     }
     printf("Input an integer: ");
-    nums[index] = atoi(input);  //converts input from strings to ints
+    nums[index] = atoi(input);  // Converts input from strings to ints
     printf("%i\n", index);
     index++;
-     //error if input greater than permitted size
   }
 
   // for (int i=0; i<index; i++) {
