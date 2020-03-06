@@ -6,35 +6,46 @@ Author: Gracey Wilson
 #include <stdlib.h>
 #include <string.h>
 
-char * convertToInt(char *s) {
-  for (int i=0; i<strlen(s); i++) {
-    s[i] = atoi(s[i]);
-    // total += atoi(s[i]); //uncomment and add total as an input for this to work
-  }
-  return s;
-}
-
-int addUp(char *s) {
+int addUp(int *s, int length) {
+  /*
+    Input: a pointer to an array of ints, and an integer which is the size of that array.
+    Output: an integer, the total of all the contents of the int array added up.
+  */
   int total;
-  for (int i=0; i<strlen(s); i++) {
+  for (int i=0; i<length; i++) {
+    printf("%i\n", s[i]);
     total += s[i];
   }
+  printf("%i\n", total);
   return total;
 }
 
+
 int main() {
-  char input[]; //how do i know how big to make it? malloc?
-  char *s = input; //makes a point to where the user's input will be stored
-  int total;
-  // printf("%i\n", strlen(s));
-  while (input != ctrl-D) {
+  /*
+    This function prompts a user to input numbers. It converts each input to int format and saves it to an array called nums. Then it calls addUp() which adds the numbers all up. Then it prints the total.
+  */
+  char input[5];
+  int nums[5];
+  int index = 0;
+  printf("\n Input an integer: ");
+  while (fgets(input, 5, stdin) != NULL) {  //typing Ctrl-D will return NULL and end the loop
+    if (index > 4) {
+      break;
+    }
     printf("Input an integer: ");
-    fgets(input, 5, stdin);
-    //error if input greater than permitted size
+    nums[index] = atoi(input);  //converts input from strings to ints
+    printf("%i\n", index);
+    index++;
+     //error if input greater than permitted size
   }
-  convertToInt(s);  //converts the contents of s from strings to ints
-  total = addUp(s);
-  printf("%i\n", total);
+
+  // for (int i=0; i<index; i++) {
+  //
+  //   printf("%i\n", nums[i]);
+  // }
+  int total = addUp(nums, index);
+  printf("Your total is: %i\n", total);
   // optional: error if sum exceeds largest int that can be repped
   return 0;
 }
