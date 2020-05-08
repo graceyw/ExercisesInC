@@ -31,7 +31,23 @@ length: number of elements in the array
 
 returns: new array, caller must free
 */
-// TODO: Write this function
+int *get_int_part(double *array, int length) { //it's common that you have to pass the size of an array along with the array
+  int *res = malloc(length);
+  for (int i=0; i<length; i++) {
+    array[i] ;
+  }
+  return res;
+}
+
+int *get_both_parts(double *array, int length, int **p) { //it's common that you have to pass the size of an array along with the array
+  int *res1 = malloc(length);
+  int *res2 = malloc(length);
+  for (int i=0; i<length; i++) {
+    array[i]
+  }
+  *p = res2;
+  return res1;
+}
 
 void test_get_int_part()
 {
