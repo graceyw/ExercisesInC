@@ -36,12 +36,12 @@ Node *make_node(int val, Node *next) {
 * list: pointer to pointer to Node
 */
 void print_list(Node **list) {
-    Node *current = *list;
+    Node *curr = *list;
 
     printf("[ ");
-    while (current != NULL) {
-        printf("%d ", current->val);
-        current = current->next;
+    while (curr != NULL) {
+        printf("%d ", curr->val);
+        curr = curr->next;
     }
     printf("]\n");
 }
@@ -54,8 +54,14 @@ void print_list(Node **list) {
 * returns: int or -1 if the list is empty
 */
 int pop(Node **list) {
-    // FILL THIS IN!
-    return 0;
+    Node *head = *list;
+    if (head != NULL) {   // as long as list isn't empty
+      int h = head->val;
+      *list = head->next;  //set the 2nd element as the new head
+      free(head);
+      return h;            // return original head value
+    }
+    return -1;            // if it didn't catch that if statement, it's null
 }
 
 
@@ -65,7 +71,12 @@ int pop(Node **list) {
 * val: value to add
 */
 void push(Node **list, int val) {
-    // FILL THIS IN!
+    Node *head = *list;
+    Node *newNode = make_node(val, head);
+    *list = newNode;
+
+//     Node *newNode = make_node(val, *list);
+//     *list = newNode;
 }
 
 
@@ -79,8 +90,27 @@ void push(Node **list, int val) {
 * returns: number of nodes removed
 */
 int remove_by_value(Node **list, int val) {
-    // FILL THIS IN!
-    return 0;
+    Node *curr = *list;
+    Node *prev;
+
+    while (curr != NULL) {
+        if (curr->val == val) {  // found one!
+          if (prev->next == NULL) {    // it's the head node
+            *list = curr->next;  // make the one after curr the new head
+          }
+          else {
+            prev->next = curr->next;
+          }
+          free(curr);
+          return 1;
+        }
+        else {
+          prev = curr;   // saving the prev node
+          curr = curr->next;
+        }
+    }
+
+    return 0; // if we get here, no nodes were removed
 }
 
 
@@ -91,7 +121,18 @@ int remove_by_value(Node **list, int val) {
 * list: pointer to pointer to Node
 */
 void reverse(Node **list) {
-    // FILL THIS IN!
+    // make pointer to next be to prev. so similar to remove with the prev
+    Node *prev = NULL;
+    Node *curr = *list;
+    Node *next = NULL;
+
+    while (curr != NULL) {
+      next = curr->next;    // store next
+      curr->next = prev;    // reverse curr's pointer
+      prev = curr;          // move pointer along
+      curr = next;          // move pointer along
+    }
+    *list = prev;           // new head
 }
 
 
@@ -105,9 +146,10 @@ int main() {
     print_list(list);
 
     int retval = pop(list);
+    printf("%i\n", retval); // test pop
     print_list(list);
 
-    push(list, retval+10);
+    push(list, retval+10);  //should push 11 to the list
     print_list(list);
 
     remove_by_value(list, 3);
