@@ -73,10 +73,7 @@ int pop(Node **list) {
 void push(Node **list, int val) {
     Node *head = *list;
     Node *newNode = make_node(val, head);
-    *list = newNode;
-
-//     Node *newNode = make_node(val, *list);
-//     *list = newNode;
+    *list = newNode;                       // don't understand why head = newNode doesn't work? Prava said maybe head is a pointer that exists at stack when func is executed but then disappears after. Thoughts?
 }
 
 
