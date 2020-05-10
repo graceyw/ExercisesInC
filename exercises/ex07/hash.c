@@ -1,4 +1,7 @@
-/* Example code for Exercises in C.
+/*
+Gracey Wilson HW 7: I completed the functions and all the tests work as expected. My only question is: when the test makes a new map with space for 10 lists and then add 2 lists to the map, is there ever a reason to care at what index they are added? (In this example they were added at 1 and 8, but I wonder whether we would ever want to specify inserting them in order or something.)
+
+Example code for Exercises in C.
 
 Copyright 2016 Allen Downey
 License: Creative Commons Attribution-ShareAlike 3.0
@@ -178,7 +181,12 @@ int hash_hashable(Hashable *hashable)
 */
 int equal_int (void *ip, void *jp)
 {
-    // FILL THIS IN!
+    int i = *(int *)ip;   //actual value of i
+    int j = *(int *)jp;   //actual value of j
+
+    if (i == j) {
+      return 1;
+    }
     return 0;
 }
 
@@ -192,7 +200,12 @@ int equal_int (void *ip, void *jp)
 */
 int equal_string (void *s1, void *s2)
 {
-    // FILL THIS IN!
+    char ** first = (char **)s1;
+    char ** second = (char **)s2;
+
+    if (strcmp(*first, *second) == 0) {   //strcmp compares 2 strings and returns 0 if equal
+      return 1;
+    }
     return 0;
 }
 
@@ -207,8 +220,7 @@ int equal_string (void *s1, void *s2)
 */
 int equal_hashable(Hashable *h1, Hashable *h2)
 {
-    // FILL THIS IN!
-    return 0;
+    return h1->equal(h1->key, h2->key);   //equal() is function that compares 2 keys within Hashable object
 }
 
 
@@ -296,7 +308,15 @@ Node *prepend(Hashable *key, Value *value, Node *rest)
 /* Looks up a key and returns the corresponding value, or NULL */
 Value *list_lookup(Node *list, Hashable *key)
 {
-    // FILL THIS IN!
+    while (list != NULL) {
+
+      if (list->key == key) {
+        return list->value;
+      }
+
+      list = list->next;
+    }
+
     return NULL;
 }
 
@@ -341,15 +361,17 @@ void print_map(Map *map)
 /* Adds a key-value pair to a map. */
 void map_add(Map *map, Hashable *key, Value *value)
 {
-    // FILL THIS IN!
+    Node *newFirst;
+    newFirst = make_node(key, value, map->lists[(hash_hashable(key)) % map->n]);   //will work whether hash_hashable() returns null or not
+
+    map->lists[(hash_hashable(key)) % map->n] = newFirst;
 }
 
 
 /* Looks up a key and returns the corresponding value, or NULL. */
 Value *map_lookup(Map *map, Hashable *key)
 {
-    // FILL THIS IN!
-    return NULL;
+    return list_lookup(map->lists[(hash_hashable(key))%map->n], key);
 }
 
 
